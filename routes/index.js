@@ -27,6 +27,21 @@ router.get('/pokemons', function (req, res, next) {
   }
 });
 
+router.get('/pokemons/:id', function (req, res, next) {
+  try {
+    let pokemons = JSON.parse(fs.readFileSync("pokemons.json"))
+    const { id } = req.params
+    const pokemon = pokemons.data.filter(p => p.id === parseInt(id))
+    if (!pokemon.length) {
+      throw new Error("Pokemon is not found.")
+    }
+    res.status(200).send({ pokemon: pokemon[0] })
+  } catch (err) {
+    err.statusCode = 500
+    next(err)
+  }
+});
+
 router.post('/pokemons', function (req, res, next) {
   try {
     let pokemons = JSON.parse(fs.readFileSync("pokemons.json"))
@@ -59,10 +74,11 @@ router.post('/pokemons', function (req, res, next) {
   }
 });
 
-router.put('/pokemons', function (req, res, next) {
+router.put('/pokemons/:id', function (req, res, next) {
   try {
     let pokemons = JSON.parse(fs.readFileSync("pokemons.json"))
-    let { name, id, types, url } = req.body
+    let { id } = req.params
+    let { name, types, url } = req.body
     if (!name || !id || !types?.length || !url) {
       throw new Error("Missing required data")
     }
