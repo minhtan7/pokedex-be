@@ -10,15 +10,14 @@ const createData = async () => {
             for (let [key, value] of Object.entries(p)) {
                 console.log([key, value])
                 if (key.startsWith("Type")) {
-                    types.push(value)
+                    types.push(value.toLowerCase())
                 }
             }
-            return { name: p.Name[0].toUpperCase() + p.Name.slice(1), types, index: index + 1 }
+            return { name: p.Name, types, id: index + 1 }
         })
         let newSet = new Set(pokemons)
         pokemons = Array.from(newSet).map(pokemon => {
-            console.log(pokemon)
-            return { ...pokemon, url: `http://localhost:5000/images/${pokemon.index}.png` }
+            return { ...pokemon, url: `http://localhost:5000/images/${pokemon.id}.png` }
         })
         db.data = pokemons
         db.totalPokemons = pokemons.length
