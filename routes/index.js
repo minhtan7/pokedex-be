@@ -35,7 +35,20 @@ router.get('/pokemons/:id', function (req, res, next) {
     if (!pokemon.length) {
       throw new Error("Pokemon is not found.")
     }
-    res.status(200).send({ pokemon: pokemon[0] })
+    let previousPokemon
+    let nextPokemon
+    if (parseInt(id) === 1) {
+      previousPokemon = pokemons.data[pokemons.data.length - 1]
+    } else {
+      previousPokemon = pokemons.data[parseInt(id) - 2]
+    }
+    if (parseInt(id) === pokemons.data.length) {
+      nextPokemon = pokemons.data[0]
+    } else {
+      nextPokemon = pokemons.data[parseInt(id)]
+    }
+
+    res.status(200).send({ pokemon: pokemon[0], previousPokemon, nextPokemon })
   } catch (err) {
     err.statusCode = 500
     next(err)
