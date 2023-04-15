@@ -4,8 +4,8 @@ Pokedex Project is a group project developed to demonstrate a solution for a giv
 [**Live Demo**](https://pokedex-mt.netlify.app/)
 
 ## Repositories
-- [Front-end](!https://github.com/minhtan7/pokedex-fe)
-- [Back-end](!https://github.com/minhtan7/pokedex-be)
+- [Front-end](https://github.com/minhtan7/pokedex-fe)
+- [Back-end](https://github.com/minhtan7/pokedex-be)
 
 ## Features
 - **Home Page**: 
