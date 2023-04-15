@@ -1,5 +1,6 @@
 const csv = require("csvtojson");
 const fs = require("fs")
+require("dotenv").config()
 
 const createData = async () => {
     try {
@@ -17,7 +18,7 @@ const createData = async () => {
         })
         let newSet = new Set(pokemons)
         pokemons = Array.from(newSet).map(pokemon => {
-            return { ...pokemon, url: `http://localhost:5000/images/${pokemon.id}.png` }
+            return { ...pokemon, url: `${process.env.BACKEND_URL}/images/${pokemon.id}.png` }
         })
         db.data = pokemons.slice(0, 721)
         db.totalPokemons = db.data.length
